@@ -31,50 +31,51 @@ public class Question {
     }
 
     private void loadGuess() {
-        boolean iterated = false;
+        boolean firstIteration = true;
         int countWrong = 0;
         String temp = "";
+
         while (guessesCount > 0) {
 
-            boolean correctGuess = false;
             System.out.print("Guess a letter: ");
-            String guess = this.reader.nextLine();
+            String letter = this.reader.nextLine();
+            boolean correctGuess = false;
 
             for (int i = 0; i < secretWord.length(); i++) {
 
-                boolean isCorrectLetter = guess.equals(Character.toString(secretWord.charAt(i)));
+                boolean isCorrectLetter = letter.equals(Character.toString(secretWord.charAt(i)));
+
                 if (isCorrectLetter) {
                     correctGuess = true;
 
-                    if (!iterated)
+                    if (firstIteration) {
                         temp += Character.toString(secretWord.charAt(i));
+                    }
                     else {
-                        String holder = Character.toString(
-                                temp.charAt(i)).replace("-", guess);
-                        temp = temp.substring(0, i) + holder +
+                        temp = temp.substring(0, i) +
+                                letter +
                                 temp.substring(i + 1, temp.length());
                     }
 
-                } else {
-                    if (!iterated) {
-                        temp += "-";
-                    }
                 }
 
+                if(!isCorrectLetter && firstIteration) {
+                    temp += "-";
+                }
             }
 
-            iterated = true;
+            firstIteration = false;
 
             if (correctGuess) {
-                System.out.println("The word contains the letter " + guess + ".");
+                System.out.println("The word contains the letter " + letter + ".");
             } else {
 
-                if(guess.length() == 1) {
+                if(letter.length() == 1) {
                     guessesCount--;
                     countWrong++;
                 }
 
-                printWrong(guess, countWrong);
+                printWrong(letter, countWrong);
             }
 
             System.out.println(temp);
@@ -85,14 +86,14 @@ public class Question {
             }
         }
 
-        if (guessesCount <= 0) {
+        if (guessesCount == 0) {
             printLose();
         }
         this.reader.close();
     }
 
-    private void printWrong(String guess, int countWrong) {
-        System.out.println("The word does not contain the letter " + guess + ".");
+    private void printWrong(String letter, int countWrong) {
+        System.out.println("The word does not contain the letter " + letter + ".");
         System.out.println(
             "You have (" +
             countWrong +

@@ -8,9 +8,9 @@ public class Driver {
         final String FILE_NAME = "cities.txt";
         final int    MAX_GUESS = 10;
 
-        String city = getCity(FILE_NAME);
-        Question game = new Question(city, MAX_GUESS);
-        //System.out.println(city);
+        String secretWord = getCity(FILE_NAME);
+        Question game = new Question(secretWord, MAX_GUESS);
+        //System.out.println(secretWord);
         game.init();
     }
 
