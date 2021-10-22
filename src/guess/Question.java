@@ -1,11 +1,13 @@
 package guess;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Question {
     private Scanner reader;
     public String secretWord;
     public int guessesCount;
+    public ArrayList<String> wl = new ArrayList<String>();
 
     Question(String secretWord, int guessesCount) {
         this.reader = new Scanner(System.in);
@@ -93,12 +95,18 @@ public class Question {
     }
 
     private void printWrong(String letter, int countWrong) {
+        if(!wl.contains(letter))
+            wl.add(letter);
         System.out.println("The word does not contain the letter " + letter + ".");
         System.out.println(
             "You have (" +
             countWrong +
             ") guesses wrong letter."
         );
+        for (String str : wl) {
+            System.out.print(str);
+        }
+        System.out.println("");
     }
 
     private void printWin() {

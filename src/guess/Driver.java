@@ -10,7 +10,7 @@ public class Driver {
 
         String secretWord = getCity(FILE_NAME);
         Question game = new Question(secretWord, MAX_GUESS);
-        //System.out.println(secretWord);
+        System.out.println(secretWord);
         game.init();
     }
 
