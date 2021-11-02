@@ -14,7 +14,7 @@ public class Driver {
         Rook rook     = new Rook();
         Queen queen   = new Queen();
         King king     = new King();
-        
+
         pieces.add(pawn);
         pieces.add(knight);
         pieces.add(bishop);
